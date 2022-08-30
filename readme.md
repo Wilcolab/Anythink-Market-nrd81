@@ -11,3 +11,9 @@ When implementing a new feature or fixing a bug, please create a new pull reques
 ## First setup
 
 **[TODO 05/01/2018 @vanessa-cooper]:** _It's been a while since anyone ran a fresh copy of this repo. I think it's worth documenting the steps needed to install and run the repo on a new machine?_
+
+Start by installing Docker from https://docs.docker.com/get-docker/
+If you get the "WSL 2 installation is incomplete" error, install the linux kernel from https://aka.ms/wsl2kernel
+You can verify docker is ready by running the following commands in your terminal: docker -v and docker-compose -v
+run docker-compose up
+ test this by pointing your browser to http://localhost:3000/api/ping
