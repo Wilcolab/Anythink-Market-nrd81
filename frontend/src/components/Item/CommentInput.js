@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import agent from "../../agent";
 import { connect } from "react-redux";
 import { ADD_COMMENT } from "../../constants/actionTypes";
@@ -20,6 +20,7 @@ const CommentInput = (props) => {
     });
     setBody("");
   };
+
   return (
     <form className="card comment-form m-2" onSubmit={createComment}>
       <div className="card-block">
@@ -43,6 +44,6 @@ const CommentInput = (props) => {
       </div>
     </form>
   );
-}
+};
 
 export default connect(() => ({}), mapDispatchToProps)(CommentInput);
