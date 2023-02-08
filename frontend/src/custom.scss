@@ -26,9 +26,7 @@ body {
   background-image: url("./imgs/background.png");
   background-position: top;
   background-repeat: no-repeat;
-  background-size: cover;
 }
-
 .page {
   margin-top: 2 * $spacer;
   margin-bottom: 2 * $spacer;
@@ -59,23 +57,5 @@ body {
 }
 
 .user-info {
-  max-width: 800px;
-  margin: 0 auto;
-}
-
-@media (max-width: 767px) {
-  .user-pic {
-    height: 30px;
-    width: 30px;
-  }
-
-  .user-img {
-    width: 70px;
-    height: 70px;
-    border-radius: 70px;
-  }
-
-  .item-img {
-    height: 120px;
-  }
+  min-width: 800px;
 }
