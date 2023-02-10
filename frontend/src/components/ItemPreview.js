@@ -58,7 +58,7 @@ const ItemPreview = (props) => {
           {item.seller.isVerified && (
             <span className="top-seller-icon pl-2">
               <img
-                src={'public/verified_seller.svg'}
+                src={'/workspaces/Anythink-Market-nrd81/frontend/public/verified_seller.svg'}
                 alt={'TOP SELLER'}
                 className="top-seller-icon-image"
               />
