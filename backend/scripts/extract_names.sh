@@ -10,7 +10,7 @@ output_file="output_names.txt"
 filtered_lines=$(grep -i "@amazon.com" $input_file)
 
 # Use cut to extract the email address and last name
-extracted_columns=$(echo "$filtered_lines" | cut -d ',' -f 3,2)
+extracted_columns=$(echo "$filtered_lines" | cut -d ',' -f 2,3)
 
 # Use tr to replace commas with spaces
 formatted_output=$(echo "$extracted_columns" | tr ',' ' ')
