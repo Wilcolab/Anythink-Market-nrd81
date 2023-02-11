@@ -1,31 +1,26 @@
-#!/bin/bash
+#!/usr/bin/bash
 
-# Store the file name
-file=$1
+# Store the input file name
+input_file=$1
 
 # Store the output file name
-output_file="output.txt"
+output_file="output_names.txt"
 
-# Check if the file exists
-if [ -f $file ]; then
-  echo "$file exists"
-  # Read each line of the file
-  while IFS=',' read -r name last email; do
-    # Check if the email is from @amazon.com
-    if [[ $email == *"@amazon.com" ]]; then
-      # Print the name and last name to the output file
-      echo "Name: $name" >> $output_file 2> error.txt
-      echo "Last Name: $last" >> $output_file 2> error.txt
-    fi
-  done < $file
-  if [ -s error.txt ]; then
-    echo "There was an error while writing to the file."
-    echo "The error message is:"
-    cat error.txt
-  else
-    echo "The filtered names and last names have been written to $output_file."
-  fi
+# Use grep to filter lines that contain "@amazon.com"
+filtered_lines=$(grep -i "@amazon.com" $input_file)
+
+# Use cut to extract the email address and last name
+extracted_columns=$(echo "$filtered_lines" | cut -d ',' -f 3,2)
+
+# Use tr to replace commas with spaces
+formatted_output=$(echo "$extracted_columns" | tr ',' ' ')
+
+# Redirect the final output to the output file
+echo "$formatted_output" > "$output_file"
+
+# Confirm that the output was written to the file
+if [ -f "$output_file" ]; then
+  echo "The filtered names and last names have been written to $output_file."
 else
-  # If the file does not exist, print an error message
-  echo "Error: The file $file does not exist."
+  echo "Error: Failed to write to $output_file."
 fi
