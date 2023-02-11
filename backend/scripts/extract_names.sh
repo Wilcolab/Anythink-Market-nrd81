@@ -1,12 +1,10 @@
-#!/usr/bin/bash
+#!/bin/bash
 
-# Store the input file name
 input_file=$1
-
-# Store the output file name
 output_file="output_names.txt"
 
 # Use grep to filter lines that contain "@amazon.com"
+# Make the search case-insensitive using the -i option
 filtered_lines=$(grep -i "@amazon.com" $input_file)
 
 # Use cut to extract the email address and last name
