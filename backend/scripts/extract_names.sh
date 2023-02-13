@@ -1,24 +1,23 @@
 #!/bin/bash
 
-input_file=$1
-output_file="output_names.txt"
-
-# Use grep to filter lines that contain "@amazon.com"
-# Make the search case-insensitive using the -i option
-filtered_lines=$(grep -i "@amazon.com" $input_file)
-
-# Use cut to extract the email address and last name
-extracted_columns=$(echo "$filtered_lines" | cut -d ',' -f 2,3)
-
-# Use tr to replace commas with spaces
-formatted_output=$(echo "$extracted_columns" | tr ',' ' ')
-
-# Redirect the final output to the output file
-echo "$formatted_output" > "$output_file"
-
-# Confirm that the output was written to the file
-if [ -f "$output_file" ]; then
-  echo "The filtered names and last names have been written to $output_file."
-else
-  echo "Error: Failed to write to $output_file."
+# Check if a file was passed as an argument
+if [ $# -eq 0 ]; then
+  echo "No file provided."
+  exit 1
 fi
+
+# Check if the file exists
+if [ ! -f $1 ]; then
+  echo "File does not exist."
+  exit 1
+fi
+
+# Filter the lines with @amazon.com in the email column
+grep "@amazon.com" $1 | while read line; do
+  # Extract the first name and last name from each line
+  first_name=$(echo $line | cut -d "," -f 3)
+  last_name=$(echo $line | cut -d "," -f 2)
+  
+  # Print the first name and last name separated by a space
+  echo "$first_name $last_name"
+done > output_names.txt
