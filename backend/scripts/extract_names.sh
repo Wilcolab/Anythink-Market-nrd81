@@ -1,23 +1,24 @@
 #!/bin/bash
 
-# Check if a file was passed as an argument
-if [ $# -eq 0 ]; then
-  echo "No file provided."
-  exit 1
+# usage: ./script.sh <file_name>
+
+# Check if a file argument is passed
+if [ "$#" -ne 1 ]; then
+    echo "Error: Missing file argument."
+    echo "Usage: ./script.sh <file_name>"
+    exit 1
 fi
+
+# Store the file name in a variable
+file="$1"
 
 # Check if the file exists
-if [ ! -f $1 ]; then
-  echo "File does not exist."
-  exit 1
+if [ ! -f "$file" ]; then
+    echo "Error: File $file not found."
+    exit 1
 fi
 
-# Filter the lines with @amazon.com in the email column
-grep "@amazon.com" $1 | while read line; do
-  # Extract the first name and last name from each line
-  first_name=$(echo $line | cut -d "," -f 3)
-  last_name=$(echo $line | cut -d "," -f 2)
-  
-  # Print the first name and last name separated by a space
-  echo "$first_name $last_name"
-done > output_names.txt
+# Filter the data
+grep "@amazon.com" "$file" | awk -F "," '{print $2, $3}' > output_names.txt
+
+echo "Filtered data written to output_names.txt"
